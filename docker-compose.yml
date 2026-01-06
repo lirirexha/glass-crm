@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:16
+    container_name: glass-crm-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: glass_user
+      POSTGRES_PASSWORD: glass_pass
+      POSTGRES_DB: glass_crm
+    ports:
+      - "5432:5432"
+    volumes:
+      - glass_crm_db:/var/lib/postgresql/data
+
+volumes:
+  glass_crm_db:

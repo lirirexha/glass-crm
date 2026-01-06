@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  CLIENT
+}
+
+model Company {
+  id        Int      @id
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  users User[]
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  companyId    Int
+  company      Company  @relation(fields: [companyId], references: [id], onDelete: Restrict)
+
+  email        String
+  passwordHash String
+  role         Role     @default(ADMIN)
+
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@unique([companyId, email])
+  @@index([companyId])
+}
