@@ -46,7 +46,7 @@
     "prettier": "^2.6.2",
     "prisma": "6",
     "ts-jest": "^29.4.0",
-    "ts-node": "10.9.1",
+    "ts-node": "^10.9.2",
     "tslib": "^2.3.0",
     "typescript": "~5.9.2",
     "typescript-eslint": "^8.40.0",
@@ -64,11 +64,15 @@
     "@nestjs/core": "^11.0.0",
     "@nestjs/platform-express": "^11.0.0",
     "@prisma/client": "6",
+    "argon2": "^0.44.0",
     "axios": "^1.6.0",
     "next": "~16.0.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0"
+  },
+  "prisma": {
+    "seed": "ts-node --transpile-only apps/api/prisma/seed.ts"
   }
 }
