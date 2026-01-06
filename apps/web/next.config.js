@@ -1,6 +1,6 @@
 //@ts-check
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+//@typescript-eslint/no-var-requires
 const { composePlugins, withNx } = require('@nx/next');
 
 // This plugin is needed until this PR is merged.

@@ -3847,9 +3847,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@org/api@workspace:api":
+"@org/api@workspace:apps/api":
   version: 0.0.0-use.local
-  resolution: "@org/api@workspace:api"
+  resolution: "@org/api@workspace:apps/api"
   dependencies:
     "@nestjs/common": "npm:^11.0.0"
     "@nestjs/core": "npm:^11.0.0"

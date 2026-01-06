@@ -6,5 +6,29 @@
     "next": "~16.0.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
+  },
+  "nx": {
+    "targets": {
+      "build": {
+        "executor": "@nx/next:build",
+        "options": {
+          "outputPath": "dist/apps/web",
+          "webpack": true
+        }
+      },
+      "dev": {
+        "executor": "@nx/next:dev",
+        "options": {
+          "webpack": true
+        }
+      },
+      "test": {
+        "executor": "@nx/jest:jest",
+        "options": {
+          "jestConfig": "apps/web/jest.config.cts",
+          "passWithNoTests": true
+        }
+      }
+    }
   }
 }
