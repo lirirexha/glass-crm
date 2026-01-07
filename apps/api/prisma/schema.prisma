@@ -26,7 +26,7 @@ model User {
   companyId    Int
   company      Company  @relation(fields: [companyId], references: [id], onDelete: Restrict)
 
-  email        String
+  email        String   @unique
   passwordHash String
   role         Role     @default(ADMIN)
 
@@ -34,6 +34,6 @@ model User {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  @@unique([companyId, email])
   @@index([companyId])
 }
+
