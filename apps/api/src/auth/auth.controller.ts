@@ -1,6 +1,8 @@
-import { Body, Controller, Post } from '@nestjs/common'
+import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common'
 import { Throttle } from '@nestjs/throttler'
+import type { Request } from 'express'
 import { AuthService } from './auth.service'
+import { JwtTenantGuard } from './guards/jwt-tenant.guard'
 
 class LoginDto {
   email!: string
@@ -16,5 +18,17 @@ export class AuthController {
   @Post('login')
   login(@Body() body: LoginDto) {
     return this.authService.login(body.email, body.password)
+  }
+
+  @UseGuards(JwtTenantGuard)
+  @Get('me')
+  me(@Req() req: Request) {
+    const user = (req as any).user
+
+    return {
+      id: user.sub,
+      companyId: user.companyId,
+      role: user.role,
+    }
   }
 }
