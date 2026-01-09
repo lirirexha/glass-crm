@@ -3,6 +3,9 @@ import { Throttle } from '@nestjs/throttler'
 import type { Request } from 'express'
 import { AuthService } from './auth.service'
 import { JwtTenantGuard } from './guards/jwt-tenant.guard'
+import { RolesGuard } from './guards/roles.guard'
+import { Roles } from './decorators/roles.decorator'
+import { Role } from '@prisma/client'
 
 class LoginDto {
   email!: string
@@ -20,7 +23,8 @@ export class AuthController {
     return this.authService.login(body.email, body.password)
   }
 
-  @UseGuards(JwtTenantGuard)
+  @UseGuards(JwtTenantGuard, RolesGuard)
+  @Roles(Role.ADMIN)
   @Get('me')
   me(@Req() req: Request) {
     const user = (req as any).user
