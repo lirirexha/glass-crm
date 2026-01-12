@@ -6,6 +6,7 @@ import { JwtTenantGuard } from './guards/jwt-tenant.guard'
 import { RolesGuard } from './guards/roles.guard'
 import { Roles } from './decorators/roles.decorator'
 import { Role } from '@prisma/client'
+import { Public } from './decorators/public.decorator'
 
 class LoginDto {
   email!: string
@@ -18,6 +19,7 @@ export class AuthController {
 
   //TODO: To be discussed
   @Throttle({ default: { limit: 5, ttl: 60 } })
+  @Public()
   @Post('login')
   login(@Body() body: LoginDto) {
     return this.authService.login(body.email, body.password)
