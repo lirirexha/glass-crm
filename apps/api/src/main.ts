@@ -9,10 +9,18 @@ import { AppModule } from './app/app.module';
 import { Reflector } from '@nestjs/core'
 import { JwtService } from '@nestjs/jwt'
 import { JwtTenantGuard } from './auth/guards/jwt-tenant.guard'
+import { ValidationPipe } from '@nestjs/common'
 
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true,
+    })
+  )
   const reflector = app.get(Reflector)
   const jwt = app.get(JwtService)
   app.useGlobalGuards(new JwtTenantGuard(jwt, reflector))

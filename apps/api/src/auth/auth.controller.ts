@@ -7,9 +7,13 @@ import { RolesGuard } from './guards/roles.guard'
 import { Roles } from './decorators/roles.decorator'
 import { Role } from '@prisma/client'
 import { Public } from './decorators/public.decorator'
+import { IsEmail, IsString } from 'class-validator'
 
-class LoginDto {
+export class LoginDto {
+  @IsEmail()
   email!: string
+
+  @IsString()
   password!: string
 }
 
