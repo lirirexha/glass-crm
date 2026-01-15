@@ -13,14 +13,14 @@ export class ProductService {
     })
   }
 
-  async create(companyId: number, dto: CreateProductDto) {
+  async create(companyId: number, data: CreateProductDto) {
     return this.prisma.product.create({
       data: {
         companyId,
-        name: dto.name,
-        description: dto.description,
-        price: dto.price,
-        isActive: dto.isActive ?? true,
+        name: data.name,
+        description: data.description,
+        price: data.price,
+        isActive: data.isActive ?? true,
       },
     })
   }
