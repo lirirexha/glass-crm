@@ -9,7 +9,6 @@ export class ProductService {
   list(companyId: number) {
     return this.prisma.product.findMany({
       where: { companyId, isActive: true },
-      //TODO: To be discussed
       orderBy: { createdAt: 'desc' },
     })
   }
