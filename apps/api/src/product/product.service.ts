@@ -66,4 +66,34 @@ export class ProductService {
       },
     })
   }
+
+  // duplicate of list(), just in case we want to change smth later - eg return fewer data
+  async listPublic(
+    companyId: number,
+    query: { offset?: number; limit?: number }
+  ) {
+    const offset = query.offset ?? 0
+    const limit = query.limit ?? 20
+
+    const where = { companyId, isActive: true }
+
+    const total = await this.prisma.product.count({where})
+
+      const data = await this.prisma.product.findMany({
+        where,
+        orderBy: { createdAt: 'desc' },
+        skip: offset,
+        take: limit,
+      })
+
+    return {
+      data,
+      meta: {
+        total,
+        limit,
+        offset,
+        hasMore: offset + data.length < total,
+      },
+    }
+  }
 }
