@@ -1,9 +1,18 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common'
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  UseGuards,
+  Patch,
+  Param,
+  ParseIntPipe,
+} from '@nestjs/common'
 import { ProductService } from './product.service'
 import { RolesGuard } from '../auth/guards/roles.guard'
 import { Roles } from '../auth/decorators/roles.decorator'
 import { Role } from '@prisma/client'
-import { CreateProductDto } from './dto/create-product.dto'
+import { CreateProductDto, UpdateProductDto } from './dto/types'
 import { CurrentUser } from '../auth/decorators/current-user.decorator'
 import type { CurrentUserPayload } from '../auth/decorators/current-user.decorator'
 
@@ -24,5 +33,16 @@ export class ProductController {
     @Body() data: CreateProductDto
   ) {
     return this.service.create(user.companyId, data)
+  }
+
+  @UseGuards(RolesGuard)
+  @Roles(Role.ADMIN)
+  @Patch(':id')
+  update(
+    @CurrentUser() user: CurrentUserPayload,
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: UpdateProductDto
+  ) {
+    return this.service.update(user.companyId, id, dto)
   }
 }
