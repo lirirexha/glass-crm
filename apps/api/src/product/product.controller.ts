@@ -7,12 +7,13 @@ import {
   Patch,
   Param,
   ParseIntPipe,
+  Query
 } from '@nestjs/common'
 import { ProductService } from './product.service'
 import { RolesGuard } from '../auth/guards/roles.guard'
 import { Roles } from '../auth/decorators/roles.decorator'
 import { Role } from '@prisma/client'
-import { CreateProductDto, UpdateProductDto } from './dto/types'
+import { CreateProductDto, UpdateProductDto, ListProductsQuery } from './dto/types'
 import { CurrentUser } from '../auth/decorators/current-user.decorator'
 import type { CurrentUserPayload } from '../auth/decorators/current-user.decorator'
 
@@ -21,8 +22,8 @@ export class ProductController {
   constructor(private readonly service: ProductService) {}
 
   @Get()
-  list(@CurrentUser() user: CurrentUserPayload) {
-    return this.service.list(user.companyId)
+  list(@CurrentUser() user: CurrentUserPayload, @Query() query: ListProductsQuery) {
+    return this.service.list(user.companyId, query)
   }
 
   @UseGuards(RolesGuard)
