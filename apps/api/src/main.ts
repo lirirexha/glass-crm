@@ -10,10 +10,13 @@ import { Reflector } from '@nestjs/core'
 import { JwtService } from '@nestjs/jwt'
 import { JwtTenantGuard } from './auth/guards/jwt-tenant.guard'
 import { ValidationPipe } from '@nestjs/common'
+import { HttpExceptionFilter } from './common/filters/http-exception.filter'
 
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  // test phase for exception filter
+  app.useGlobalFilters(new HttpExceptionFilter())
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
