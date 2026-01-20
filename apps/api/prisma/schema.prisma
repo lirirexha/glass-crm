@@ -37,6 +37,23 @@ model User {
   @@index([companyId])
 }
 
+model Client {
+  id        Int      @id @default(autoincrement())
+  companyId Int
+
+  email     String
+  name      String
+  phone     String?
+
+  isActive  Boolean  @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([companyId])
+  @@index([email])
+}
+
 
 model Product {
   id            Int       @id @default(autoincrement())
