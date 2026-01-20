@@ -31,6 +31,17 @@ async function main() {
     },
   })
 
+  await prisma.client.upsert({
+    where: { id: 1 },
+    update: {},
+    create: {
+      companyId: 1111,
+      name: 'John Doe',
+      email: 'john.doe@example.com',
+      phone: '+123456789',
+    },
+  })
+
   console.log('Company ', companyId)
   console.log('Admin ', adminEmail)
   console.log('Pass ', adminPassword)
