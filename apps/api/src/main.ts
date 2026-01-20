@@ -14,6 +14,7 @@ import { ValidationPipe } from '@nestjs/common'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.setGlobalPrefix('api') // every controller is under /api/...
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -21,6 +22,16 @@ async function bootstrap() {
       transform: true,
     })
   )
+  app.enableCors({
+    origin: [ 'http://localhost:4200'],
+    credentials: true,
+    allowedHeaders: [
+      'Authorization',
+      'Content-Type',
+      'x-company-id',
+    ],
+    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+  })
   const reflector = app.get(Reflector)
   const jwt = app.get(JwtService)
   app.useGlobalGuards(new JwtTenantGuard(jwt, reflector))

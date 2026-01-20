@@ -48,3 +48,6 @@ test-output
 # Next.js
 .next
 out
+
+apps/**/.env.local
+apps/**/.env.*.local

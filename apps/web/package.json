@@ -17,9 +17,11 @@
         }
       },
       "dev": {
-        "executor": "@nx/next:dev",
+        "executor": "@nx/next:server",
         "options": {
-          "webpack": true
+          "buildTarget": "@org/web:build",
+          "port": 4200,
+          "dev": true
         }
       },
       "test": {
@@ -28,6 +30,17 @@
           "jestConfig": "apps/web/jest.config.cts",
           "passWithNoTests": true
         }
+      },
+      "start": {
+        "executor": "@nx/next:server",
+        "options": {
+          "buildTarget": "@org/web:build",
+          "port": 4200,
+          "dev": false
+        },
+        "dependsOn": [
+          "build"
+        ]
       }
     }
   }
