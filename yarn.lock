@@ -3336,6 +3336,14 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@next/swc-linux-x64-gnu@npm:^16.1.4":
+  version: 16.1.4
+  resolution: "@next/swc-linux-x64-gnu@npm:16.1.4"
+  checksum: 10c0/cb708e4db193c95e6637d1021305017e9ec2ef2a740d2829219a0532e42023d31b61a28712254635d0c0aa721a53bc29be657039cf7658a80699755b55af53de
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
 "@next/swc-linux-x64-musl@npm:16.0.10":
   version: 16.0.10
   resolution: "@next/swc-linux-x64-musl@npm:16.0.10"
@@ -3578,7 +3586,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nx/nest@npm:^22.3.3":
+"@nx/nest@npm:22.3.3":
   version: 22.3.3
   resolution: "@nx/nest@npm:22.3.3"
   dependencies:
@@ -3904,11 +3912,12 @@ __metadata:
     "@nestjs/testing": "npm:^11.0.0"
     "@nestjs/throttler": "npm:^6.5.0"
     "@next/eslint-plugin-next": "npm:^16.0.1"
+    "@next/swc-linux-x64-gnu": "npm:^16.1.4"
     "@nx/eslint": "npm:22.3.3"
     "@nx/eslint-plugin": "npm:22.3.3"
     "@nx/jest": "npm:22.3.3"
     "@nx/js": "npm:22.3.3"
-    "@nx/nest": "npm:^22.3.3"
+    "@nx/nest": "npm:22.3.3"
     "@nx/next": "npm:^22.3.3"
     "@nx/node": "npm:22.3.3"
     "@nx/web": "npm:22.3.3"
