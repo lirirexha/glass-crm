@@ -41,7 +41,7 @@ model Client {
   id        Int      @id @default(autoincrement())
   companyId Int
 
-  email     String?
+  email     String
   name      String
   phone     String?
 
