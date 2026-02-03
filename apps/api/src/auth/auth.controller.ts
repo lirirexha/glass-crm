@@ -8,8 +8,6 @@ import { Roles } from './decorators/roles.decorator'
 import { Role } from '@prisma/client'
 import { Public } from './decorators/public.decorator'
 import { IsEmail, IsString } from 'class-validator'
-import { ApiBearerAuth, ApiHeader, ApiTags } from '@nestjs/swagger'
-
 
 export class LoginDto {
   @IsEmail()
@@ -19,9 +17,7 @@ export class LoginDto {
   password!: string
 }
 
-@ApiTags('Auth')
-@ApiBearerAuth('bearer')
-@ApiHeader({ name: 'x-company-id', required: true })
+// @ApiHeader({ name: 'x-company-id', required: true })
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
