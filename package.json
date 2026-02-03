@@ -65,6 +65,7 @@
     "@nestjs/core": "^11.0.0",
     "@nestjs/jwt": "^11.0.2",
     "@nestjs/platform-express": "^11.0.0",
+    "@nestjs/swagger": "^11.2.5",
     "@nestjs/throttler": "^6.5.0",
     "@prisma/client": "6",
     "argon2": "^0.44.0",
@@ -75,7 +76,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.8.0"
+    "rxjs": "^7.8.0",
+    "swagger-ui-express": "^5.0.1"
   },
   "prisma": {
     "seed": "ts-node --transpile-only apps/api/prisma/seed.ts"
