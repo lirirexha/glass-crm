@@ -17,6 +17,7 @@ export class LoginDto {
   password!: string
 }
 
+// @ApiHeader({ name: 'x-company-id', required: true })
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
