@@ -12,27 +12,28 @@ import { JwtTenantGuard } from './auth/guards/jwt-tenant.guard'
 import { ValidationPipe } from '@nestjs/common'
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
 
-
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api') // every controller is under /api/...
 
-  const swaggerConfig = new DocumentBuilder()
-  .setTitle('Glass CRM API')
-  .setVersion('1.0')
-  .addBearerAuth(
-    { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
-    'bearer'
-  )
-  .addApiKey(
-    { type: 'apiKey', name: 'x-company-id', in: 'header' },
-    'x-company-id'
-  )
-  .build()
+  if (process.env.NODE_ENV !== 'production') {
+    const swaggerConfig = new DocumentBuilder()
+    .setTitle('Glass CRM API')
+    .setVersion('1.0')
+    .addBearerAuth(
+      { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
+      'bearer'
+    )
+    .addApiKey(
+      { type: 'apiKey', name: 'x-company-id', in: 'header' },
+      'x-company-id'
+    )
+    .build()
 
-  const document = SwaggerModule.createDocument(app, swaggerConfig)
-  document.security = [{ bearer: [], 'x-company-id': [] }]
-  SwaggerModule.setup('api/docs', app, document)
+    const document = SwaggerModule.createDocument(app, swaggerConfig)
+    document.security = [{ bearer: [], 'x-company-id': [] }]
+    SwaggerModule.setup('api/docs', app, document)
+  }
 
   app.useGlobalPipes(
     new ValidationPipe({
